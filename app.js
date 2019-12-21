@@ -8,4 +8,6 @@ app.get('/', (req, res) => {
   res.send('App - Intro Star Wars');
 });
 
-app.listen(3000, () => console.log('Aplicação executando na porta 3000!'));
+app.listen(process.env.PORT || 3000, () => {
+  console.log('listening at 3333');
+});
