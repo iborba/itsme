@@ -1,10 +1,3 @@
-/**
- * Arquivo: intro.js
- * Data: 20/12/2019
- * Descrição: Lógica da Intro do filme Star Wars.
- * Author: Glaucia Lemos
- */
-
 let width = window.innerWidth;
 let height = window.innerHeight;
 
@@ -40,7 +33,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = width;
 canvas.height = height;
 
-const num = 100;
+const num = 400;
 const size = 2;
 const elements = [];
 
