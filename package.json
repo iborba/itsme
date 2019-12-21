@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon",
+    "start": "node app.js",
     "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix"
   },
   "keywords": [
