@@ -29,6 +29,7 @@ function iniciar() {
   intro.className = 'intro intro_texto intro_animacao';
   historia.className = 'historia historia_texto historia_animacao';
   som.play();
+  document.getElementById('botao').style.display = 'none';
 }
 
 /* Fundo de estrelas */
