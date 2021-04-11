@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Intro - Israel Borba</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <link href="../static/css/starwars.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="botao" id="botao" onclick="iniciar()">
+    <a href="#"><img src="../static/images/cliqueaquismall.png" alt="fonte-de-guerra-nas-estrelas" border="0"></a>
+  </div>
+  <div class="skip">
+    <a href="/home">Skip intro</a>
+  </div>
+  <canvas id="canvas"></canvas>
+
+  <section class="intro intro_texto">
+    A long time ago in a galaxy far,<br> far away....
+  </section>
+
+  <section class="paragrafos">
+    <div class="historia historia_texto">
+      <p class="text-center">Episódio I</p>
+      <br>
+      <p class="text-center">A vida de um programador</p>
+      <br>
+      <p class="text-center">
+        O fim da adolescência se aproxima e o jovem Padawan está em apuros buscando sua profissão!
+        Após anos na academia de Química, o jovem rebelde decide afastar-se do movimento e entrar na revolução da TI.
+        Durante a jornada, seus mestres insistem:
+      </p>
+      <br>
+      <p class="text-center">
+        Bom programador para ser, precisará de horas muitas de estudo.
+      </p>
+      <p class="text-center">
+        Muito tempo depois, o ex Padawan já possui o treinamento completo Jedi, mas as batalhas nunca
+        cessam...
+      </p>
+      <br>
+    </div>
+  </section>
+
+  <audio src="../static/sounds/starwars.mp3" id="som"></audio>
+
+  <script src="../static/js/intro.js"></script>
+</body>
+
+</html>
