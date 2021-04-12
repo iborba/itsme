@@ -1,4 +1,4 @@
-function EnemySpaceShips(context, keyboard, spaceShipImage, animation, startPosition) {
+function EnemySpaceShips(context, keyboard, spaceShipImage, animation, startPosition, enemyName) {
 	this.context = context;
 	this.keyboard = keyboard;
 	this.animation = animation;
@@ -10,10 +10,28 @@ function EnemySpaceShips(context, keyboard, spaceShipImage, animation, startPosi
 	this.y = -100 // Starts before appears in screen
 	this.spaceShipImage = spaceShipImage;
 	this.spritesheet = new Spritesheet(this.context, this.spaceShipImage, 3, 3);
+	this.enemyName = enemyName;
+	this.hitsCount = 0
+	this.hits = []
+	this.maxHits = 3
 }
 
 EnemySpaceShips.prototype = {
 	update: function () {
+		for (var i = 0; i < alliedShoots.length; i++) {
+			alliedShoots[i].y += alliedShoots[i].speed;
+
+			if ((alliedShoots[i].x >= this.x - this.width && alliedShoots[i].x <= this.x + this.width) && (alliedShoots[i].y >= this.y - this.height && alliedShoots[i].y <= this.y + this.height)) {
+				this.hitsCount += 1;
+				this.hits[this.enemyName] = { 'hits': this.hitsCount }
+
+				if (this.hits[this.enemyName]['hits'] === this.maxHits) {
+					console.log(this, 'use this data')
+					this.killed(this.enemyName)
+				}
+			}
+		}
+
 		randomInt = this.getRandomInt(1, 400)
 		// Move laterally the enemies
 		if (randomInt <= 200) {
@@ -22,18 +40,19 @@ EnemySpaceShips.prototype = {
 		else {
 			this.x += this.speedX;
 		}
+
 		// Shoot as enemy just if a random number is higher than a random constant
-		if (randomInt > 391) {
-			this.shoot()
-		}
+		// if (randomInt > 391) {
+		// 	this.shoot()
+		// }
 
 		// Move ahead the enemy fleet
 		this.y += this.speedY;
 	},
 
 	getRandomInt: function (min, max) {
-		min = Math.ceil(min); 
-		max = Math.floor(max); 
+		min = Math.ceil(min);
+		max = Math.floor(max);
 
 		return Math.floor(Math.random() * (max - min)) + min;
 	},
@@ -46,8 +65,18 @@ EnemySpaceShips.prototype = {
 		this.spritesheet.nextFrame();
 	},
 
+	killed: function (enemyName) {
+		// TODO: Implement the explosion
+		for (var i = 0; i < this.animation.sprites.length; i++) {
+			if (this.animation.sprites[i].enemyName === enemyName) {
+				this.animation.sprites.splice(i, 1)
+			}
+		}
+	},
+
 	shoot: function () {
 		var bullet = new Bullet(this.context, this, true);
+		enemyShoots[enemyShoots.length] = { 'x': this.x, 'y': this.y, 'speed': bullet.speed, 'enemyName': this.enemyName }
 		this.animation.newSprite(bullet);
 	}
 }

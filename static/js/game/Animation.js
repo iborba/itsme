@@ -42,6 +42,12 @@ Animation.prototype = {
 		this.isPlaying = false;
 	},
 
+	stop: function() {
+		this.pause();
+		// TODO: Shows a resume of match
+		// TODO: Save in sqlite the progress in game
+	},
+	
 	nextFrame: function () {
 		if (!this.isPlaying) {
 			return;

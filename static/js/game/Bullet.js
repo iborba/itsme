@@ -2,11 +2,11 @@ function Bullet(context, ship, isEnemy = false) {
    this.context = context;
    this.ship = ship;
 
-   this.width = 3;
+   this.width = 1;
    this.height = 25;
    this.x = ship.x + 18;
    this.y = ship.y;
-   this.speed = -20;
+   this.speed = -15;
 
    if (isEnemy) {
       this.y = this.y + 33;
@@ -15,7 +15,6 @@ function Bullet(context, ship, isEnemy = false) {
    } else {
       this.color = '#00ea00';
    }
-   this.border = '1px solid #ffffff';
 }
 
 Bullet.prototype = {

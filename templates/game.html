@@ -12,7 +12,6 @@ Home
 <script src="../static/js/game/Animation.js"></script>
 <script src="../static/js/game/Keyboard.js"></script>
 <script src="../static/js/game/Spritesheet.js"></script>
-<script src="../static/js/game/Parallax.js"></script>
 <script src="../static/js/game/Bullet.js"></script>
 <script src="../static/js/game/SpaceShip.js"></script>
 <script src="../static/js/game/EnemySpaceShips.js"></script>
@@ -21,14 +20,18 @@ Home
   let height = window.innerHeight;
 
   window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
+    width = canvas.width = window.innerWidth - document.querySelector('.sidenav').clientWidth;
     height = canvas.height = window.innerHeight;
   });
 
   const canvas = document.getElementById('canvas')
   const context = canvas.getContext('2d')
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth - document.querySelector('.sidenav').clientWidth;
+  canvas.height = window.innerHeight
+  document.querySelector('canvas').style.marginLeft = document.querySelector('.sidenav').clientWidth + 'px';
+  const enemyCount = 5
+  enemyShoots = []
+  alliedShoots = []
 
   window.onload = function () {
     const images = {
@@ -44,16 +47,18 @@ Home
 
     var keyboard = new Keyboard(document)
     const animation = new Animation(context)
+
     // Create the ally spaceship
     var ship = new SpaceShip(context, keyboard, images.ship, animation);
+
     // Animate the ally spaceship
     animation.newSprite(ship);
 
     // Create the first fleat of enemies
     createEnemies(keyboard, images, animation)
 
+    // Send a new fleet of enemies each 10 seconds
     setInterval(() => {
-      // Send a new fleet of enemies each 10 seconds
       createEnemies(keyboard, images, animation)
     }, 15000);
 
@@ -69,14 +74,13 @@ Home
   function createEnemies(keyboard, images, animation) {
     // Create a number of enemies 
     // TODO: improve the number of enemies as the time goes
-    const enemyCount = 5
 
     for (var e = 1; e <= enemyCount; e++) {
       // Set a position for each enemy ship in canvas
-      let startPosition = 200 * e
+      let startPosition = 220 * e
       let enemy = []
-      enemy[e] = new EnemySpaceShips(context, keyboard, images.enemy, animation, startPosition)
-      animation.newSprite(enemy[e], true);
+      enemy[e] = new EnemySpaceShips(context, keyboard, images.enemy, animation, startPosition, e)
+      animation.newSprite(enemy[e]);
     }
   }
 

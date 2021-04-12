@@ -10,10 +10,27 @@ function SpaceShip(context, keyboard, spaceShipImage, animation) {
 	this.y = (this.context.canvas.height) - this.height;
 	this.spaceShipImage = spaceShipImage;
 	this.spritesheet = new Spritesheet(this.context, this.spaceShipImage, 3, 3);
+	this.hitsCount = 0
+	this.hits = []
+	this.maxHits = 20
 }
 
 SpaceShip.prototype = {
 	update: function () {
+		for (var i = 0; i < enemyShoots.length; i++) {
+			enemyShoots[i].y += enemyShoots[i].speed;
+
+			if ((enemyShoots[i].x >= this.x - this.width && enemyShoots[i].x <= this.x + this.width) && (enemyShoots[i].y >= this.y - this.height && enemyShoots[i].y <= this.y + this.height)) {
+				this.hitsCount += 1;
+				this.hits[this.hitsCount] = { 'enemyName': enemyShoots[i].enemyName }
+
+				if (this.hitsCount === this.maxHits) {
+					console.log(this.hits, 'use this data')
+					this.animation.stop()
+				}
+			}
+		}
+
 		if (this.keyboard.isPressed(KEY_LEFT) && this.x > 0) {
 			this.x -= this.speedX;
 		} else if (this.keyboard.isPressed(KEY_RIGHT) && this.x < this.context.canvas.width - this.width) {
@@ -51,6 +68,8 @@ SpaceShip.prototype = {
 
 	shoot: function () {
 		var bullet = new Bullet(this.context, this);
+		alliedShoots[alliedShoots.length] = { 'x': this.x, 'y': this.y, 'speed': bullet.speed }
+
 		this.animation.newSprite(bullet);
 	}
 }
