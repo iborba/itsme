@@ -26,25 +26,36 @@ EnemySpaceShips.prototype = {
 				this.hits[this.enemyName] = { 'hits': this.hitsCount }
 
 				if (this.hits[this.enemyName]['hits'] === this.maxHits) {
-					console.log(this, 'use this data')
+					// Kill the enemy
 					this.killed(this.enemyName)
 				}
 			}
 		}
 
-		randomInt = this.getRandomInt(1, 400)
 		// Move laterally the enemies
-		if (randomInt <= 200) {
-			this.x -= this.speedX;
+		if (this.enemyName % 2 === 0) {
+			// hit the limit of screen
+			if (this.x + this.width <= 0) {
+				this.x += this.speedX;
+			}
+			else {
+				this.x -= this.speedX;
+			}
 		}
 		else {
-			this.x += this.speedX;
+			// hit the limit of screen
+			if (this.x + this.width >= this.context.canvas.clientWidth) {
+				this.x -= this.speedX;
+			}
+			else {
+				this.x += this.speedX;
+			}
 		}
 
 		// Shoot as enemy just if a random number is higher than a random constant
-		// if (randomInt > 391) {
-		// 	this.shoot()
-		// }
+		if (this.getRandomInt(1, 400) > 391) {
+			// this.shoot()
+		}
 
 		// Move ahead the enemy fleet
 		this.y += this.speedY;

@@ -29,7 +29,6 @@ Home
   canvas.width = window.innerWidth - document.querySelector('.sidenav').clientWidth;
   canvas.height = window.innerHeight
   document.querySelector('canvas').style.marginLeft = document.querySelector('.sidenav').clientWidth + 'px';
-  const enemyCount = 5
   enemyShoots = []
   alliedShoots = []
 
@@ -72,12 +71,15 @@ Home
   }
 
   function createEnemies(keyboard, images, animation) {
+    const enemyCount = 6
+    //let enemyDistance = canvas.width - 
+
     // Create a number of enemies 
     // TODO: improve the number of enemies as the time goes
 
     for (var e = 1; e <= enemyCount; e++) {
       // Set a position for each enemy ship in canvas
-      let startPosition = 220 * e
+      let startPosition = 0 + (window.innerWidth / (enemyCount - e)) * e
       let enemy = []
       enemy[e] = new EnemySpaceShips(context, keyboard, images.enemy, animation, startPosition, e)
       animation.newSprite(enemy[e]);
