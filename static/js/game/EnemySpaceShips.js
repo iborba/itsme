@@ -6,8 +6,8 @@ function EnemySpaceShips(context, keyboard, spaceShipImage, animation, startPosi
 	this.speedY = 1;
 	this.width = 20;
 	this.height = 25;
-	this.x = startPosition;
-	this.y = -100 // Starts before appears in screen
+	this.spaceshipPositionX = startPosition;
+	this.spaceshipPositionY = -100 // Starts before appears in screen
 	this.spaceShipImage = spaceShipImage;
 	this.spritesheet = new Spritesheet(this.context, this.spaceShipImage, 3, 3);
 	this.enemyName = enemyName;
@@ -21,7 +21,7 @@ EnemySpaceShips.prototype = {
 		for (var i = 0; i < alliedShoots.length; i++) {
 			alliedShoots[i].y += alliedShoots[i].speed;
 
-			if ((alliedShoots[i].x >= this.x - this.width && alliedShoots[i].x <= this.x + this.width) && (alliedShoots[i].y >= this.y - this.height && alliedShoots[i].y <= this.y + this.height)) {
+			if ((alliedShoots[i].x >= this.spaceshipPositionX - this.width && alliedShoots[i].x <= this.spaceshipPositionX + this.width) && (alliedShoots[i].y >= this.spaceshipPositionY - this.height && alliedShoots[i].y <= this.spaceshipPositionY + this.height)) {
 				this.hitsCount += 1;
 				this.hits[this.enemyName] = { 'hits': this.hitsCount }
 
@@ -35,20 +35,20 @@ EnemySpaceShips.prototype = {
 		// Move laterally the enemies
 		if (this.enemyName % 2 === 0) {
 			// hit the limit of screen
-			if (this.x + this.width <= 0) {
-				this.x += this.speedX;
+			if (this.spaceshipPositionX + this.width <= 0) {
+				this.spaceshipPositionX += this.speedX;
 			}
 			else {
-				this.x -= this.speedX;
+				this.spaceshipPositionX -= this.speedX;
 			}
 		}
 		else {
 			// hit the limit of screen
-			if (this.x + this.width >= this.context.canvas.clientWidth) {
-				this.x -= this.speedX;
+			if (this.spaceshipPositionX + this.width >= this.context.canvas.clientWidth) {
+				this.spaceshipPositionX -= this.speedX;
 			}
 			else {
-				this.x += this.speedX;
+				this.spaceshipPositionX += this.speedX;
 			}
 		}
 
@@ -58,7 +58,7 @@ EnemySpaceShips.prototype = {
 		}
 
 		// Move ahead the enemy fleet
-		this.y += this.speedY;
+		this.spaceshipPositionY += this.speedY;
 	},
 
 	getRandomInt: function (min, max) {
@@ -72,7 +72,7 @@ EnemySpaceShips.prototype = {
 		this.spritesheet.line = 2;
 		this.spritesheet.column = 0;
 
-		this.spritesheet.draw(this.x, this.y);
+		this.spritesheet.draw(this.spaceshipPositionX, this.spaceshipPositionY);
 		this.spritesheet.nextFrame();
 	},
 
@@ -87,7 +87,7 @@ EnemySpaceShips.prototype = {
 
 	shoot: function () {
 		var bullet = new Bullet(this.context, this, true);
-		enemyShoots[enemyShoots.length] = { 'x': this.x, 'y': this.y, 'speed': bullet.speed, 'enemyName': this.enemyName }
+		enemyShoots[enemyShoots.length] = { 'x': this.spaceshipPositionX, 'y': this.spaceshipPositionY, 'speed': bullet.speed, 'enemyName': this.enemyName }
 		this.animation.newSprite(bullet);
 	}
 }
