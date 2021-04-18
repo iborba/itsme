@@ -16,6 +16,9 @@ Home
 <script src="../static/js/game/SpaceShip.js"></script>
 <script src="../static/js/game/EnemySpaceShips.js"></script>
 <script>
+  const newEnemiesInterval = 9000
+  const enemyCount = 1
+  let totalEnemies = 1
   let width = window.innerWidth;
   let height = window.innerHeight;
 
@@ -59,7 +62,7 @@ Home
     // Send a new fleet of enemies each 10 seconds
     setInterval(() => {
       createEnemies(keyboard, images, animation)
-    }, 15000);
+    }, newEnemiesInterval);
 
     // Shoot (just when the ally press SPACE)
     keyboard.onFire(SPACE, function () {
@@ -71,18 +74,16 @@ Home
   }
 
   function createEnemies(keyboard, images, animation) {
-    const enemyCount = 6
-    //let enemyDistance = canvas.width - 
-
     // Create a number of enemies 
     // TODO: improve the number of enemies as the time goes
+    let enemy = []
 
     for (var e = 1; e <= enemyCount; e++) {
       // Set a position for each enemy ship in canvas
-      let startPosition = 0 + (window.innerWidth / (enemyCount - e)) * e
-      let enemy = []
-      enemy[e] = new EnemySpaceShips(context, keyboard, images.enemy, animation, startPosition, e)
-      animation.newSprite(enemy[e]);
+      let startPosition = (document.querySelector('.sidenav').clientWidth + 100)
+      enemy[totalEnemies] = new EnemySpaceShips(context, keyboard, images.enemy, animation, startPosition, totalEnemies)
+      animation.newSprite(enemy[totalEnemies]);
+      totalEnemies += 1
     }
   }
 

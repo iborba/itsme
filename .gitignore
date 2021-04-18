@@ -1,0 +1,4 @@
+.env
+install_flask.sh
+venv
+__pycache__

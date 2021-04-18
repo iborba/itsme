@@ -2,7 +2,7 @@ function SpaceShip(context, keyboard, spaceShipImage, animation) {
 	this.context = context;
 	this.keyboard = keyboard;
 	this.animation = animation;
-	this.speedX = 3;
+	this.speedX = 7;
 	this.speedY = 3;
 	this.width = 40;
 	this.height = 45;
@@ -12,7 +12,7 @@ function SpaceShip(context, keyboard, spaceShipImage, animation) {
 	this.spritesheet = new Spritesheet(this.context, this.spaceShipImage, 3, 3);
 	this.hitsCount = 0
 	this.hits = []
-	this.maxHits = 20
+	this.maxHits = 30
 }
 
 SpaceShip.prototype = {
